@@ -1,9 +1,9 @@
-package com.project.modulo4.mapper;
+package com.project.modulo4.player.mapper;
 
-import com.project.modulo4.models.dao.CreatePlayerDTO;
-import com.project.modulo4.models.dao.PlayerDTO;
-import com.project.modulo4.models.dao.UpdatePlayerDTO;
-import com.project.modulo4.models.model.PlayerModel;
+import com.project.modulo4.player.models.dto.CreatePlayerDTO;
+import com.project.modulo4.player.models.dto.PlayerDTO;
+import com.project.modulo4.player.models.dto.UpdatePlayerDTO;
+import com.project.modulo4.player.models.model.PlayerModel;
 import org.mapstruct.InjectionStrategy;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;

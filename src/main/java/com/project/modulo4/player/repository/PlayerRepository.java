@@ -1,6 +1,6 @@
-package com.project.modulo4.repository;
+package com.project.modulo4.player.repository;
 
-import com.project.modulo4.models.model.PlayerModel;
+import com.project.modulo4.player.models.model.PlayerModel;
 import org.springframework.stereotype.Repository;
 
 import java.util.LinkedList;

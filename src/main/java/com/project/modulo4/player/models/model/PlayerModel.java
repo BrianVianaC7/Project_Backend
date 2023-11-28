@@ -1,4 +1,4 @@
-package com.project.modulo4.models.dao;
+package com.project.modulo4.player.models.model;
 
 
 import lombok.AllArgsConstructor;
@@ -10,7 +10,7 @@ import lombok.ToString;
 @Setter
 @ToString
 @AllArgsConstructor
-public class PlayerDTO {
+public class PlayerModel {
     private long id;
     private String name;
     private String lastName;

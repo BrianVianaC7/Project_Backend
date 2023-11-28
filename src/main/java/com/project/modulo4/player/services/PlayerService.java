@@ -1,11 +1,11 @@
-package com.project.modulo4.services;
+package com.project.modulo4.player.services;
 
-import com.project.modulo4.mapper.PlayerMapper;
-import com.project.modulo4.models.dao.CreatePlayerDTO;
-import com.project.modulo4.models.dao.PlayerDTO;
-import com.project.modulo4.models.dao.UpdatePlayerDTO;
-import com.project.modulo4.models.model.PlayerModel;
-import com.project.modulo4.repository.PlayerRepository;
+import com.project.modulo4.player.mapper.PlayerMapper;
+import com.project.modulo4.player.models.dto.CreatePlayerDTO;
+import com.project.modulo4.player.models.dto.PlayerDTO;
+import com.project.modulo4.player.models.dto.UpdatePlayerDTO;
+import com.project.modulo4.player.models.model.PlayerModel;
+import com.project.modulo4.player.repository.PlayerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

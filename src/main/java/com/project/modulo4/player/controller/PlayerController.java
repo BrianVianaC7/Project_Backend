@@ -1,10 +1,9 @@
-package com.project.modulo4.controller;
+package com.project.modulo4.player.controller;
 
-import com.project.modulo4.models.dao.CreatePlayerDTO;
-import com.project.modulo4.models.dao.PlayerDTO;
-import com.project.modulo4.models.dao.UpdatePlayerDTO;
-import com.project.modulo4.models.model.PlayerModel;
-import com.project.modulo4.services.PlayerService;
+import com.project.modulo4.player.models.dto.CreatePlayerDTO;
+import com.project.modulo4.player.models.dto.PlayerDTO;
+import com.project.modulo4.player.models.dto.UpdatePlayerDTO;
+import com.project.modulo4.player.services.PlayerService;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
