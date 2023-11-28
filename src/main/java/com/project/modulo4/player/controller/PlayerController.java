@@ -16,7 +16,7 @@ import java.util.List;
 
 @RestController
 @Slf4j
-@RequestMapping("/jugadores")
+@RequestMapping("/players")
 public class PlayerController {
 
     @Autowired
