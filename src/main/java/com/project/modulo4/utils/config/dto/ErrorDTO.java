@@ -1,4 +1,4 @@
-package com.project.modulo4.player.models.dto;
+package com.project.modulo4.utils.config.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

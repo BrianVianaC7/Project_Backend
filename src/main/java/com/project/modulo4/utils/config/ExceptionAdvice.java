@@ -1,7 +1,7 @@
 package com.project.modulo4.utils.config;
 
 
-import com.project.modulo4.player.models.dto.ErrorDTO;
+import com.project.modulo4.utils.config.dto.ErrorDTO;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
