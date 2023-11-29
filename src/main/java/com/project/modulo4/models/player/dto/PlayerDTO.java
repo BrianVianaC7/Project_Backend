@@ -25,4 +25,5 @@ public class PlayerDTO {
     private String position;
     private int trophies;
     private String image;
+    //subiendo la nueva branch
 }
