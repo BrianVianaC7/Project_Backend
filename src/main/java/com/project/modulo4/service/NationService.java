@@ -21,12 +21,12 @@ public class NationService {
 
 
     public List<NationDTO> getAll() {
-        List<NationModel> nations = nationRepository.getAll();
-        return nations.stream().map(x -> nationMapper.toDTO(x)).toList();
+        List<NationModel> nations = nationRepository.findAll();
+        return nations.stream().map(nationMapper::toDTO).toList();
     }
 
     public NationDTO getById(Long nationId) {
-        Optional<NationModel> nationOptional = nationRepository.getById(nationId);
+        Optional<NationModel> nationOptional = nationRepository.findById(nationId);
         return nationOptional.map(x -> nationMapper.toDTO(x)).orElse(null);
     }
 }

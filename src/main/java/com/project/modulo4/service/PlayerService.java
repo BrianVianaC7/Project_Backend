@@ -21,30 +21,30 @@ public class PlayerService {
     private PlayerMapper playerMapper;
 
     public List<PlayerDTO> getAll() {
-        List<PlayerModel> players = playerRepository.getAll();
-        return players.stream().map(x -> playerMapper.toDTO(x)).toList();
+        List<PlayerModel> players = playerRepository.findAll();
+        return players.stream().map(playerMapper::toDTO).toList();
     }
 
     public PlayerDTO getById(Long playerId) {
-        Optional<PlayerModel> playerOptional = playerRepository.getById(playerId);
-        return playerOptional.map(x -> playerMapper.toDTO(x)).orElse(null);
+        Optional<PlayerModel> playerOptional = playerRepository.findById(playerId);
+        return playerOptional.map(playerMapper::toDTO).orElse(null);
     }
 
     public PlayerDTO createPlayer(CreatePlayerDTO createPlayerDTO) {
-        PlayerModel playerModel = playerMapper.toModel(createPlayerDTO);
-        return playerMapper.toDTO(playerRepository.createPlayer(playerModel));
+        PlayerModel playerModel = playerRepository.save(playerMapper.toModel(createPlayerDTO));
+        return playerMapper.toDTO(playerModel);
     }
-
     public void deleteById(Long playerId) {
         playerRepository.deleteById(playerId);
     }
 
     public PlayerDTO updatePlayer(Long playerId, UpdatePlayerDTO updatePlayerDTO) {
-        Optional<PlayerModel> playerOptional = playerRepository.getById(playerId);
+        Optional<PlayerModel> playerOptional = playerRepository.findById(playerId);
         if (playerOptional.isPresent()) {
             PlayerModel existingPlayer = playerOptional.get();
-            PlayerModel updatedPlayer = playerMapper.updateToModel(updatePlayerDTO, existingPlayer);
-            playerRepository.updatePlayer(updatedPlayer);
+            playerMapper.updateToModel(updatePlayerDTO, existingPlayer);
+            PlayerModel updatedPlayer = playerRepository.save(existingPlayer);
+
             return playerMapper.toDTO(updatedPlayer);
         } else {
             return null;
