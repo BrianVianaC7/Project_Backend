@@ -23,11 +23,13 @@ public class PlayerController {
     private PlayerService playerService;
 
     @GetMapping
+    @ResponseStatus(HttpStatus.OK)
     public List<PlayerDTO> getAll() {
         return playerService.getAll();
     }
 
     @GetMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<PlayerDTO> getPlayerById(@PathVariable Long id) {
         PlayerDTO player = playerService.getById(id);
         if (player != null) {
@@ -38,12 +40,14 @@ public class PlayerController {
     }
 
     @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<PlayerDTO> createPlayer(@Valid @RequestBody CreatePlayerDTO createPlayerDTO) {
         PlayerDTO createdPlayer = playerService.createPlayer(createPlayerDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdPlayer);
     }
 
     @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<Void> deletePlayerById(@PathVariable Long id) {
         try {
             playerService.deleteById(id);
@@ -54,6 +58,7 @@ public class PlayerController {
     }
 
     @PutMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<PlayerDTO> updatePlayerById(@PathVariable Long id, @Valid @RequestBody UpdatePlayerDTO updatePlayerDTO) {
         PlayerDTO updatedPlayer = playerService.updatePlayer(id, updatePlayerDTO);
         if (updatedPlayer != null) {
