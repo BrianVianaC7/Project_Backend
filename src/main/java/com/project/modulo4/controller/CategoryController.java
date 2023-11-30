@@ -4,11 +4,9 @@ import com.project.modulo4.models.category.dto.CategoryDTO;
 import com.project.modulo4.service.CategoryService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -21,11 +19,13 @@ public class CategoryController {
     private CategoryService categoryService;
 
     @GetMapping
+    @ResponseStatus(HttpStatus.OK)
     public List<CategoryDTO> getAll() {
         return categoryService.getAll();
     }
 
     @GetMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<CategoryDTO> getCategoryById(@PathVariable Long id) {
         CategoryDTO category = categoryService.getById(id);
         if (category != null) {

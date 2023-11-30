@@ -5,11 +5,9 @@ import com.project.modulo4.models.league.dto.LeagueDTO;
 import com.project.modulo4.service.LeagueService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -21,11 +19,13 @@ public class LeagueController {
     private LeagueService leagueService;
 
     @GetMapping
+    @ResponseStatus(HttpStatus.OK)
     public List<LeagueDTO> getAll() {
         return leagueService.getAll();
     }
 
     @GetMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<LeagueDTO> getLeagueById(@PathVariable Long id) {
         LeagueDTO league = leagueService.getById(id);
         if (league != null) {
