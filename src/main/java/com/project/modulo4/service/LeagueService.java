@@ -18,12 +18,12 @@ public class LeagueService {
     LeagueMapper leagueMapper;
 
     public List<LeagueDTO> getAll() {
-        List<LeagueModel> leagues = leagueRepository.getAll();
-        return leagues.stream().map(x -> leagueMapper.toDTO(x)).toList();
+        List<LeagueModel> leagues = leagueRepository.findAll();
+        return leagues.stream().map(leagueMapper::toDTO).toList();
     }
 
     public LeagueDTO getById(Long leagueId) {
-        Optional<LeagueModel> leagueOptional = leagueRepository.getById(leagueId);
-        return leagueOptional.map(x -> leagueMapper.toDTO(x)).orElse(null);
+        Optional<LeagueModel> leagueOptional = leagueRepository.findById(leagueId);
+        return leagueOptional.map(leagueMapper::toDTO).orElse(null);
     }
 }

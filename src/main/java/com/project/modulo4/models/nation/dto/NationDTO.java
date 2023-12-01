@@ -1,5 +1,6 @@
 package com.project.modulo4.models.nation.dto;
 
+import com.project.modulo4.models.league.dto.LeagueDTO;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;

@@ -11,11 +11,11 @@ public class UpdatePlayerDTO {
     private String name;
     private String lastName;
     private String nickName;
-    private String gender;
+    private long categoryId;
     private int numberJersey;
-    private String nation;
-    private String league;
-    private String clubTeam;
+    private long nationId;
+    private long leagueId;
+    private long clubTeamId;
     private String position;
     private int trophies;
 }

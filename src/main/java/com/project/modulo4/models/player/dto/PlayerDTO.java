@@ -1,10 +1,16 @@
 package com.project.modulo4.models.player.dto;
 
 
+import com.project.modulo4.models.category.dto.CategoryDTO;
+import com.project.modulo4.models.club.dto.ClubDTO;
+import com.project.modulo4.models.league.dto.LeagueDTO;
+import com.project.modulo4.models.nation.dto.NationDTO;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import org.hibernate.validator.constraints.Range;
 
 @Getter
 @Setter
@@ -25,5 +31,4 @@ public class PlayerDTO {
     private String position;
     private int trophies;
     private String image;
-    //subiendo la nueva branch
 }

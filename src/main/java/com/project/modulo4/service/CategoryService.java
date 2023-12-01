@@ -19,13 +19,13 @@ public class CategoryService {
     CategoryMapper categoryMapper;
 
     public List<CategoryDTO> getAll() {
-        List<CategoryModel> category = categoryRepository.getAll();
-        return category.stream().map(x -> categoryMapper.toDTO(x)).toList();
+        List<CategoryModel> category = categoryRepository.findAll();
+        return category.stream().map(categoryMapper::toDTO).toList();
     }
 
     public CategoryDTO getById(Long categoryId) {
-        Optional<CategoryModel> categoryOptional = categoryRepository.getById(categoryId);
-        return categoryOptional.map(x -> categoryMapper.toDTO(x)).orElse(null);
+        Optional<CategoryModel> categoryOptional = categoryRepository.findById(categoryId);
+        return categoryOptional.map(categoryMapper::toDTO).orElse(null);
     }
 }
 

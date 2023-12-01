@@ -19,12 +19,12 @@ public class ClubService {
     ClubMapper clubMapper;
 
     public List<ClubDTO> getAll() {
-        List<ClubModel> clubs = clubRepository.getAll();
-        return clubs.stream().map(x -> clubMapper.toDTO(x)).toList();
+        List<ClubModel> clubs = clubRepository.findAll();
+        return clubs.stream().map(clubMapper::toDTO).toList();
     }
 
     public ClubDTO getById(Long clubId) {
-        Optional<ClubModel> clubOptional = clubRepository.getById(clubId);
-        return clubOptional.map(x -> clubMapper.toDTO(x)).orElse(null);
+        Optional<ClubModel> clubOptional = clubRepository.findById(clubId);
+        return clubOptional.map(clubMapper::toDTO).orElse(null);
     }
 }
