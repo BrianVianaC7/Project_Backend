@@ -15,9 +15,9 @@ import lombok.ToString;
 public class LeagueDTO {
 
     private long leagueId;
-    private NationDTO nationId;
+    private long nationId;
     private String leagueName;
-    private CategoryDTO categoryId;
+    private long categoryId;
     private String leagueImage;
 
 }

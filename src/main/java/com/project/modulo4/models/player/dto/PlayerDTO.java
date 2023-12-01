@@ -21,13 +21,13 @@ public class PlayerDTO {
     private String name;
     private String lastName;
     private String nickName;
-    private CategoryDTO categoryId;
+    private long categoryId;
     private String birthDate;
     private int age;
     private int numberJersey;
-    private NationDTO nationId;
-    private LeagueDTO leagueId;
-    private ClubDTO clubTeamId;
+    private long nationId;
+    private long leagueId;
+    private long clubTeamId;
     private String position;
     private int trophies;
     private String image;

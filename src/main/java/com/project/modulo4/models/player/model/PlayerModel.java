@@ -23,36 +23,37 @@ public class PlayerModel {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
-    @Column(nullable = false,length = 50)
+    @Column(nullable = false, length = 50)
     private String name;
-    @Column(nullable = false,length = 50)
+    @Column(nullable = false, length = 50)
     private String lastName;
-    @Column(nullable = false,length = 50)
+    @Column(nullable = false, length = 50)
     private String nickName;
-    @ManyToOne
-    @JoinColumn(name = "category_id")
-    private CategoryDTO categoryId;
-    @Column(nullable = false,length = 50)
+    @Column(nullable = false, name = "category_id")
+    @Range(min = 1, max = 2)
+    private long categoryId;
+    @Column(nullable = false, length = 50)
     private String birthDate;
     @Column(nullable = false)
-    @Range(min = 1,max = 150)
+    @Range(min = 1, max = 150)
     private int age;
     @Column(nullable = false)
-    @Range(min = 0,max = 1000)
+    @Range(min = 0, max = 1000)
     private int numberJersey;
-    @ManyToOne
-    @JoinColumn(name = "nation_id")
-    private NationDTO nationId;
-    @ManyToOne
-    @JoinColumn(name = "league_id")
-    private LeagueDTO leagueId;
-    @ManyToOne
-    @JoinColumn(name = "club_id")
-    private ClubDTO clubTeamId;
-    @Column(nullable = false,length = 3)
+    @Column(nullable = false, name = "nation_id")
+    @Range(min = 1, max = 156)
+    private long nationId;
+    @Column(nullable = false, name = "league_id")
+    @Range(min = 1, max = 20)
+    private long leagueId;
+
+    @Column(nullable = false, name = "club_id")
+    @Range(min = 1, max = 156)
+    private long clubTeamId;
+    @Column(nullable = false, length = 3)
     private String position;
     @Column(nullable = false)
-    @Range(min = 2, max = 3)
+    @Range(min = 0)
     private int trophies;
     @Column(nullable = false)
     private String image;

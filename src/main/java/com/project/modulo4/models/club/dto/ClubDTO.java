@@ -15,9 +15,9 @@ import lombok.ToString;
 @AllArgsConstructor
 public class ClubDTO {
     private long clubId;
-    private LeagueDTO leagueId;
-    private NationDTO nationId;
-    private CategoryDTO categoryId;
+    private long leagueId;
+    private long nationId;
+    private long categoryId;
     private String clubName;
     private String clubShortName;
     private String stadium;

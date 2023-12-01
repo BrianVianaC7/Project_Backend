@@ -44,7 +44,6 @@ public class PlayerService {
             PlayerModel existingPlayer = playerOptional.get();
             playerMapper.updateToModel(updatePlayerDTO, existingPlayer);
             PlayerModel updatedPlayer = playerRepository.save(existingPlayer);
-
             return playerMapper.toDTO(updatedPlayer);
         } else {
             return null;
