@@ -1,8 +1,6 @@
 package com.project.modulo4.models.league.model;
 
 
-import com.project.modulo4.models.category.dto.CategoryDTO;
-import com.project.modulo4.models.nation.dto.NationDTO;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -16,7 +14,6 @@ import org.hibernate.validator.constraints.Range;
 @Getter
 @Setter
 @ToString
-@AllArgsConstructor
 @Entity
 @Table(name = "leagues_table")
 public class LeagueModel {

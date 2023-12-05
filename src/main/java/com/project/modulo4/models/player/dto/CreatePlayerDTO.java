@@ -14,9 +14,7 @@ public class CreatePlayerDTO {
     @NotBlank
     private String name;
     @NotBlank
-    private String lastName;
-    @NotBlank
-    private String nickName;
+    private String longName;
     @NotBlank
     private long categoryId;
     @NotBlank
@@ -40,10 +38,6 @@ public class CreatePlayerDTO {
     @NotBlank(message = "La posición no puede estar en blanco")
     @Pattern(regexp = "^(POR|LD|LI|DFC|MCD|MC|MCO|MD|MI|ED|EI|DC|SD|PUN|SDI)$", message = "La posición no es válida")
     private String position;
-
-
-    @Min(value = 0, message = "El jugador no puede tener un numero negativo de trofeos")
-    private int trophies;
 
     @NotBlank
     private String image;

@@ -9,13 +9,11 @@ import lombok.ToString;
 @ToString
 public class UpdatePlayerDTO {
     private String name;
-    private String lastName;
-    private String nickName;
+    private String longName;
     private long categoryId;
     private int numberJersey;
     private long nationId;
     private long leagueId;
     private long clubTeamId;
     private String position;
-    private int trophies;
 }

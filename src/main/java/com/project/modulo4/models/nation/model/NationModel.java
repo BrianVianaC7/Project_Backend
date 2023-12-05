@@ -11,7 +11,6 @@ import org.hibernate.validator.constraints.Range;
 @Getter
 @Setter
 @ToString
-@AllArgsConstructor
 @Entity
 @Table(name = "nations_table")
 public class NationModel {
