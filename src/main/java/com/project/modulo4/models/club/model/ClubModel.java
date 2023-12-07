@@ -19,19 +19,15 @@ public class ClubModel {
     @Id
     private long clubId;
 
-    @Column(nullable = false, name = "league_id")
-    @Range(min = 1, max = 20)
-    private long leagueId;
-
-    @Column(nullable = false, name = "category_id")
-    @Range(min = 1, max = 20)
-    private long categoryId;
     @Column(nullable = false, length = 50)
     private String clubName;
+
     @Column(nullable = false, length = 5)
     private String clubShortName;
+
     @Column(nullable = false, length = 50)
     private String stadium;
+
     @Column(nullable = false, length = 50)
     private String clubImage;
 }

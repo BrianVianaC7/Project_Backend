@@ -2,19 +2,11 @@ package com.project.modulo4.models.club.dto;
 
 
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
-@Getter
-@Setter
-@ToString
-@AllArgsConstructor
+@Data
 public class ClubDTO {
     private long clubId;
-    private long leagueId;
-    private String  category;
     private String clubName;
     private String clubShortName;
     private String stadium;

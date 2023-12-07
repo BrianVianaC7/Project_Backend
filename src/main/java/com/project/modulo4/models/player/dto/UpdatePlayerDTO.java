@@ -1,19 +1,16 @@
 package com.project.modulo4.models.player.dto;
 
+import com.project.modulo4.utils.types.PositionTypes;
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-@Getter
-@Setter
-@ToString
+@Data
 public class UpdatePlayerDTO {
     private String name;
     private String longName;
-    private long categoryId;
+    private String nickName;
     private int numberJersey;
-    private long nationId;
-    private long leagueId;
-    private long clubTeamId;
-    private String position;
+    private PositionTypes position;
 }

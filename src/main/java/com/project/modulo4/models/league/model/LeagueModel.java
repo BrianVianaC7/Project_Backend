@@ -1,10 +1,8 @@
 package com.project.modulo4.models.league.model;
 
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import com.project.modulo4.utils.types.CategoryType;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
@@ -20,14 +18,18 @@ public class LeagueModel {
 
     @Id
     private long leagueId;
+
     @Column(nullable = false, name = "nation_id")
     @Range(min = 1, max = 20)
     private long nationId;
+
     @Column(nullable = false, length = 50)
     private String leagueName;
-    @Column(nullable = false, name = "category_id")
-    @Range(min = 1, max = 20)
-    private long categoryId;
+
+    @Column(nullable = false, length = 50)
+    @Enumerated(EnumType.STRING)
+    private CategoryType category;
+
     @Column(nullable = false, length = 50)
     private String leagueImage;
 }

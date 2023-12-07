@@ -19,7 +19,9 @@ public interface PlayerMapper {
 
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "birthDate", ignore = true)
-    @Mapping(target = "age", ignore = true)
     @Mapping(target = "image", ignore = true)
+    @Mapping(target = "preferredFoot", ignore = true)
+    @Mapping(target = "height", ignore = true)
+    @Mapping(target = "weight", ignore = true)
     PlayerModel updateToModel(UpdatePlayerDTO updatePlayerDTO, @MappingTarget PlayerModel playerModel);
 }

@@ -22,6 +22,7 @@ public class PlayerController {
     @Autowired
     private PlayerService playerService;
 
+
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
     public List<PlayerDTO> getAll() {

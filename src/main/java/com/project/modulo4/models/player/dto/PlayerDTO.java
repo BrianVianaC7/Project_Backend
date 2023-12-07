@@ -1,6 +1,8 @@
 package com.project.modulo4.models.player.dto;
 
 
+import com.project.modulo4.utils.types.PositionTypes;
+import com.project.modulo4.utils.types.PreferredFootType;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
@@ -12,15 +14,12 @@ import lombok.ToString;
 @AllArgsConstructor
 public class PlayerDTO {
     private long id;
-    private String LongName;
+    private String longName;
     private String nickName;
-    private long categoryId;
     private String birthDate;
     private int numberJersey;
-    private long nationId;
-    private String clubTeamId;
-    private String position;
-    private String preferredFoot;
+    private PositionTypes position;
+    private PreferredFootType preferredFoot;
     private double height;
     private double weight;
     private String image;
