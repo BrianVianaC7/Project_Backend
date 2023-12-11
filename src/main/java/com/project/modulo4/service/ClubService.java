@@ -2,12 +2,10 @@ package com.project.modulo4.service;
 
 import com.project.modulo4.mapper.ClubMapper;
 import com.project.modulo4.mapper.LeagueMapper;
-import com.project.modulo4.mapper.details.DetailsMapper;
 import com.project.modulo4.models.club.dto.ClubDTO;
 import com.project.modulo4.models.club.dto.CreateClubDTO;
 import com.project.modulo4.models.club.model.ClubModel;
 import com.project.modulo4.models.league.dto.LeagueDTO;
-import com.project.modulo4.models.nation.dto.NationDTO;
 import com.project.modulo4.repository.ClubRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,9 +21,6 @@ public class ClubService {
     ClubRepository clubRepository;
     @Autowired
     ClubMapper clubMapper;
-
-    @Autowired
-    private DetailsMapper clubDetailsMapper;
 
     @Autowired
     private LeagueMapper leagueMapper;
@@ -55,10 +50,6 @@ public class ClubService {
 
         ClubModel clubModel = clubMapper.toModel(createClubDTO);
         clubModel.setLeague(leagueMapper.toModel(leagueDTO));
-
-        // Comentas esta línea para desactivar la generación automática
-        // clubModel = clubRepository.save(clubModel);
-
         // Obtienes el próximo ID disponible manualmente
         Long nextId = clubRepository.findMaxClubId() + 1;
         clubModel.setClubId(nextId);

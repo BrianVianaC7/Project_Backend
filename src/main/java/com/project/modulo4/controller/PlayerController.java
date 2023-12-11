@@ -1,5 +1,7 @@
 package com.project.modulo4.controller;
 
+import com.project.modulo4.models.club.dto.ClubDTO;
+import com.project.modulo4.models.club.dto.CreateClubDTO;
 import com.project.modulo4.models.player.dto.CreatePlayerDTO;
 import com.project.modulo4.models.player.dto.PlayerDTO;
 import com.project.modulo4.models.player.dto.UpdatePlayerDTO;
@@ -40,10 +42,10 @@ public class PlayerController {
         }
     }
 
-    @PostMapping
+    @PostMapping("/{nationId}/{clubId}/player")
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<PlayerDTO> createPlayer(@Valid @RequestBody CreatePlayerDTO createPlayerDTO) {
-        PlayerDTO createdPlayer = playerService.createPlayer(createPlayerDTO);
+    public ResponseEntity<PlayerDTO> createPlayer(@Valid @RequestBody CreatePlayerDTO createPlayerDTO,@PathVariable Long nationId, @PathVariable Long clubId) {
+        PlayerDTO createdPlayer = playerService.createPlayer(createPlayerDTO, nationId, clubId);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdPlayer);
     }
 

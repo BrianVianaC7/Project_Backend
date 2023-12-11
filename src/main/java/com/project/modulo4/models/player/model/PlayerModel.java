@@ -20,7 +20,7 @@ import org.hibernate.validator.constraints.Range;
 public class PlayerModel {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id", nullable = false, unique = true)
     private long id;
 
     @Column(nullable = false, length = 50)
@@ -33,12 +33,10 @@ public class PlayerModel {
     private String birthDate;
 
     @ManyToOne
-    @MapsId("NationId")
     @JoinColumn(name = "nation_id")
     private NationModel nation;
 
     @ManyToOne
-    @MapsId("clubId")
     @JoinColumn(name = "club_id")
     private ClubModel club;
 
@@ -46,7 +44,7 @@ public class PlayerModel {
     @Range(min = 0, max = 1000)
     private int numberJersey;
 
-    @Column(nullable = false, length = 3)
+    @Column(nullable = false, length = 10)
     @Enumerated(EnumType.STRING)
     private PositionTypes position;
 

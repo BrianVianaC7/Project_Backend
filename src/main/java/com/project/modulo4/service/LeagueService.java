@@ -2,7 +2,6 @@ package com.project.modulo4.service;
 
 import com.project.modulo4.mapper.ClubMapper;
 import com.project.modulo4.mapper.LeagueMapper;
-import com.project.modulo4.mapper.details.DetailsMapper;
 import com.project.modulo4.models.club.dto.ClubDTO;
 import com.project.modulo4.models.league.dto.LeagueDTO;
 import com.project.modulo4.models.league.model.LeagueModel;
@@ -19,8 +18,6 @@ public class LeagueService {
     LeagueRepository leagueRepository;
     @Autowired
     LeagueMapper leagueMapper;
-    @Autowired
-    private DetailsMapper leagueDetailsMapper;
 
     @Autowired
     private ClubMapper clubMapper;

@@ -15,5 +15,6 @@ public enum PositionTypes {
     DC,
     SD,
     PUN,
-    SDI
+    SDI,
+    SUB
 }

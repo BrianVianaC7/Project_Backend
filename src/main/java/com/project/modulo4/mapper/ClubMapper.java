@@ -20,6 +20,8 @@ public interface ClubMapper {
     @Mapping(target = "clubId", ignore = true)
     @Mapping(target = "league", ignore = true)
     ClubModel toModel(CreateClubDTO createClubDTO);
+
+    ClubModel toModel(ClubDTO clubDTO);
     List<ClubDTO> toDTO(List<ClubModel> model);
 
 }
