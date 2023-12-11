@@ -1,6 +1,8 @@
 package com.project.modulo4.models.player.model;
 
 
+import com.project.modulo4.models.club.model.ClubModel;
+import com.project.modulo4.models.nation.model.NationModel;
 import com.project.modulo4.utils.types.PositionTypes;
 import com.project.modulo4.utils.types.PreferredFootType;
 import jakarta.persistence.*;
@@ -30,6 +32,16 @@ public class PlayerModel {
     @Column(nullable = false, length = 50)
     private String birthDate;
 
+    @ManyToOne
+    @MapsId("NationId")
+    @JoinColumn(name = "nation_id")
+    private NationModel nation;
+
+    @ManyToOne
+    @MapsId("clubId")
+    @JoinColumn(name = "club_id")
+    private ClubModel club;
+
     @Column(nullable = false)
     @Range(min = 0, max = 1000)
     private int numberJersey;
@@ -52,9 +64,4 @@ public class PlayerModel {
 
     @Column(nullable = false)
     private String image;
-
-
-
-    //que ignore los datos cuando este en mapper de players/details en el controller
-    //y que los muestre como id en el players get all y asi se hace de las dos maneras
 }

@@ -4,7 +4,6 @@ package com.project.modulo4.controller;
 import com.project.modulo4.models.club.dto.ClubDTO;
 import com.project.modulo4.models.league.dto.LeagueDTO;
 import com.project.modulo4.service.LeagueService;
-import com.project.modulo4.service.details.LeagueDetailService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,9 +18,6 @@ import java.util.List;
 public class LeagueController {
     @Autowired
     private LeagueService leagueService;
-
-    @Autowired
-    private LeagueDetailService leagueDetailService;
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
@@ -43,7 +39,7 @@ public class LeagueController {
     @GetMapping("{leagueId}/clubs")
     @ResponseStatus(HttpStatus.OK)
     public List<ClubDTO> findClubsByLeague(@PathVariable long leagueId) {
-        return leagueDetailService.findClubsByLeague(leagueId);
+        return leagueService.findClubsByLeague(leagueId);
     }
 
 }

@@ -1,6 +1,8 @@
 package com.project.modulo4.models.league.model;
 
 
+import com.project.modulo4.models.club.model.ClubModel;
+import com.project.modulo4.models.nation.model.NationModel;
 import com.project.modulo4.utils.types.CategoryType;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -8,6 +10,8 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 import org.hibernate.validator.constraints.Range;
+
+import java.util.List;
 
 @Getter
 @Setter
@@ -19,9 +23,9 @@ public class LeagueModel {
     @Id
     private long leagueId;
 
-    @Column(nullable = false, name = "nation_id")
-    @Range(min = 1, max = 20)
-    private long nationId;
+    @ManyToOne
+    @JoinColumn(name = "nation_id")
+    private NationModel nation;
 
     @Column(nullable = false, length = 50)
     private String leagueName;
@@ -32,4 +36,8 @@ public class LeagueModel {
 
     @Column(nullable = false, length = 50)
     private String leagueImage;
+
+    /*@OneToMany(mappedBy = "league")  // Establece el mapeo inverso
+    private List<ClubModel> clubs;*/
+
 }

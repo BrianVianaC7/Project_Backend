@@ -12,4 +12,6 @@ public interface LeagueMapper {
     LeagueDTO toDTO(LeagueModel leagueModel);
 
     List<LeagueDTO> toDTO(List<LeagueModel> model);
+
+    LeagueModel toModel(LeagueDTO leagueDTO);
 }

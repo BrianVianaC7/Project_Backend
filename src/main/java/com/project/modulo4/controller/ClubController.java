@@ -1,9 +1,9 @@
 package com.project.modulo4.controller;
 
 import com.project.modulo4.models.club.dto.ClubDTO;
-import com.project.modulo4.models.details.club.ClubDetailsDTO;
+import com.project.modulo4.models.club.dto.CreateClubDTO;
 import com.project.modulo4.service.ClubService;
-import com.project.modulo4.service.details.ClubDetailService;
+import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,9 +19,6 @@ public class ClubController {
 
     @Autowired
     private ClubService clubService;
-    @Autowired
-    private ClubDetailService clubDetailService;
-
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
@@ -39,12 +36,10 @@ public class ClubController {
             return ResponseEntity.notFound().build();
         }
     }
-
-    @PostMapping("{clubId}/leagues")
-    @ResponseStatus(HttpStatus.OK)
-    public void addLeague(@PathVariable long clubId, @RequestBody ClubDetailsDTO clubDetailsDTO) {
-        clubDetailService.addLeague(clubId, clubDetailsDTO.getLeagueId());
+    @PostMapping("/{leagueId}/club")
+    @ResponseStatus(HttpStatus.CREATED)
+    public ResponseEntity<ClubDTO> createClub(@Valid @RequestBody CreateClubDTO createClubDTO, @PathVariable Long leagueId) {
+        ClubDTO createdClub = clubService.createClub(createClubDTO, leagueId);
+        return ResponseEntity.status(HttpStatus.CREATED).body(createdClub);
     }
-
-
 }
