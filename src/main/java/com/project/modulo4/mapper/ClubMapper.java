@@ -2,18 +2,13 @@ package com.project.modulo4.mapper;
 
 import com.project.modulo4.models.club.dto.ClubDTO;
 import com.project.modulo4.models.club.dto.CreateClubDTO;
+import com.project.modulo4.models.club.dto.UpdateClubDTO;
 import com.project.modulo4.models.club.model.ClubModel;
-import com.project.modulo4.models.league.dto.LeagueDTO;
-import com.project.modulo4.models.league.model.LeagueModel;
-import com.project.modulo4.models.player.dto.CreatePlayerDTO;
-import com.project.modulo4.models.player.model.PlayerModel;
-import org.mapstruct.InjectionStrategy;
-import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
+import org.mapstruct.*;
 
 import java.util.List;
 
-@Mapper(componentModel = "spring", injectionStrategy = InjectionStrategy.CONSTRUCTOR)
+@Mapper(componentModel = "spring", injectionStrategy = InjectionStrategy.CONSTRUCTOR, nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
 public interface ClubMapper {
     ClubDTO toDTO(ClubModel clubModel);
 
@@ -21,7 +16,12 @@ public interface ClubMapper {
     @Mapping(target = "league", ignore = true)
     ClubModel toModel(CreateClubDTO createClubDTO);
 
+    @Mapping(target = "clubId", ignore = true)
+    @Mapping(target = "league", ignore = true)
+    ClubModel updateToModel(UpdateClubDTO updateClubDTO, @MappingTarget ClubModel clubModel);
+
     ClubModel toModel(ClubDTO clubDTO);
+
     List<ClubDTO> toDTO(List<ClubModel> model);
 
 }

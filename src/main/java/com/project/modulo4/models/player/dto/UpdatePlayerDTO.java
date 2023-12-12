@@ -8,7 +8,6 @@ import lombok.ToString;
 
 @Data
 public class UpdatePlayerDTO {
-    private String name;
     private String longName;
     private String nickName;
     private int numberJersey;

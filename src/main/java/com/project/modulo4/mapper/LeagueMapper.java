@@ -4,10 +4,11 @@ import com.project.modulo4.models.league.dto.LeagueDTO;
 import com.project.modulo4.models.league.model.LeagueModel;
 import org.mapstruct.InjectionStrategy;
 import org.mapstruct.Mapper;
+import org.mapstruct.NullValuePropertyMappingStrategy;
 
 import java.util.List;
 
-@Mapper(componentModel = "spring", injectionStrategy = InjectionStrategy.CONSTRUCTOR)
+@Mapper(componentModel = "spring", injectionStrategy = InjectionStrategy.CONSTRUCTOR, nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
 public interface LeagueMapper {
     LeagueDTO toDTO(LeagueModel leagueModel);
 

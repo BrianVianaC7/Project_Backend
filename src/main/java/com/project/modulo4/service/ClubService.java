@@ -4,8 +4,12 @@ import com.project.modulo4.mapper.ClubMapper;
 import com.project.modulo4.mapper.LeagueMapper;
 import com.project.modulo4.models.club.dto.ClubDTO;
 import com.project.modulo4.models.club.dto.CreateClubDTO;
+import com.project.modulo4.models.club.dto.UpdateClubDTO;
 import com.project.modulo4.models.club.model.ClubModel;
 import com.project.modulo4.models.league.dto.LeagueDTO;
+import com.project.modulo4.models.player.dto.PlayerDTO;
+import com.project.modulo4.models.player.dto.UpdatePlayerDTO;
+import com.project.modulo4.models.player.model.PlayerModel;
 import com.project.modulo4.repository.ClubRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,4 +61,18 @@ public class ClubService {
 
         return clubMapper.toDTO(clubModel);
     }
+
+
+    public ClubDTO updateClub(Long clubId, UpdateClubDTO updateClubDTO) {
+        Optional<ClubModel> clubOptional = clubRepository.findById(clubId);
+        if (clubOptional.isPresent()) {
+            ClubModel existingClub = clubOptional.get();
+            clubMapper.updateToModel(updateClubDTO, existingClub);
+            ClubModel updatedClub = clubRepository.save(existingClub);
+            return clubMapper.toDTO(updatedClub);
+        } else {
+            return null;
+        }
+    }
+
 }
