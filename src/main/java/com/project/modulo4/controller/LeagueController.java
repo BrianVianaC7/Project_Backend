@@ -38,7 +38,7 @@ public class LeagueController {
 
     @GetMapping("{leagueId}/clubs")
     @ResponseStatus(HttpStatus.OK)
-    public List<ClubDTO> findClubsByLeague(@PathVariable long leagueId) {
+    public List<ClubDTO> findClubsByLeague(@PathVariable Long leagueId) {
         return leagueService.findClubsByLeague(leagueId);
     }
 

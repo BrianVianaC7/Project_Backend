@@ -12,7 +12,7 @@ import java.util.List;
 @Repository
 public interface LeagueRepository extends JpaRepository<LeagueModel, Long> {
 
-    @Query("SELECT ld.clubId FROM ClubModel ld WHERE ld.league.leagueId = :leagueId")
+    @Query("SELECT ld FROM ClubModel ld WHERE ld.league.leagueId = :leagueId")
     List<ClubModel> findClubsByLeague(long leagueId);
 
 }

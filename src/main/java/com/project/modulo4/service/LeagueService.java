@@ -32,7 +32,7 @@ public class LeagueService {
         return leagueOptional.map(leagueMapper::toDTO).orElse(null);
     }
 
-    public List<ClubDTO> findClubsByLeague(long leagueId) {
+    public List<ClubDTO> findClubsByLeague(Long leagueId) {
         return clubMapper.toDTO(leagueRepository.findClubsByLeague(leagueId));
     }
 }
