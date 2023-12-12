@@ -3,6 +3,9 @@ package com.project.modulo4.controller;
 
 import com.project.modulo4.models.nation.dto.NationDTO;
 import com.project.modulo4.service.NationService;
+import com.project.modulo4.utils.exception.ClubNotFoundException;
+import com.project.modulo4.utils.exception.NationNotFoundException;
+import com.project.modulo4.utils.exception.PlayerNotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -27,12 +30,12 @@ public class NationController {
 
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<NationDTO> getNationById(@PathVariable Long id) {
+    public ResponseEntity<NationDTO> getNationById(@PathVariable Long id) throws NationNotFoundException {
         NationDTO nation = nationService.getById(id);
         if (nation != null) {
             return ResponseEntity.ok(nation);
         } else {
-            return ResponseEntity.notFound().build();
+            throw new NationNotFoundException(id);
         }
     }
 

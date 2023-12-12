@@ -13,6 +13,9 @@ import com.project.modulo4.models.player.dto.PlayerDTO;
 import com.project.modulo4.models.player.dto.UpdatePlayerDTO;
 import com.project.modulo4.models.player.model.PlayerModel;
 import com.project.modulo4.repository.PlayerRepository;
+import com.project.modulo4.utils.exception.ClubNotFoundException;
+import com.project.modulo4.utils.exception.NationNotFoundException;
+import com.project.modulo4.utils.exception.PlayerNotFoundException;
 import jakarta.transaction.Transactional;
 import lombok.extern.java.Log;
 import lombok.extern.slf4j.Slf4j;
@@ -48,22 +51,22 @@ public class PlayerService {
         return players.stream().map(playerMapper::toDTO).toList();
     }
 
-    public PlayerDTO getById(Long playerId) {
+    public PlayerDTO getById(Long playerId) throws PlayerNotFoundException{
         Optional<PlayerModel> playerOptional = playerRepository.findById(playerId);
         return playerOptional.map(playerMapper::toDTO).orElse(null);
     }
 
     @Transactional
-    public PlayerDTO createPlayer(CreatePlayerDTO createPlayerDTO, Long nationId, Long clubId) {
+    public PlayerDTO createPlayer(CreatePlayerDTO createPlayerDTO, Long nationId, Long clubId) throws ClubNotFoundException, NationNotFoundException {
 
         NationDTO nationDTO = nationService.getById(nationId);
         if (nationDTO == null){
-            throw new RuntimeException("Nation no encontrada");
+            throw new NationNotFoundException(nationId);
         }
 
         ClubDTO clubDTO = clubService.getById(clubId);
         if (clubDTO == null) {
-            throw new RuntimeException("Club no encontrada");
+            throw new ClubNotFoundException(clubId);
         }
 
         PlayerModel playerModel = playerMapper.toModel(createPlayerDTO);
@@ -81,11 +84,11 @@ public class PlayerService {
 
         return playerMapper.toDTO(playerModel);
     }
-    public void deleteById(Long playerId) {
+    public void deleteById(Long playerId) throws PlayerNotFoundException {
         playerRepository.deleteById(playerId);
     }
 
-    public PlayerDTO updatePlayer(Long playerId, UpdatePlayerDTO updatePlayerDTO) {
+    public PlayerDTO updatePlayer(Long playerId, UpdatePlayerDTO updatePlayerDTO) throws PlayerNotFoundException {
         Optional<PlayerModel> playerOptional = playerRepository.findById(playerId);
         if (playerOptional.isPresent()) {
             PlayerModel existingPlayer = playerOptional.get();
@@ -93,7 +96,7 @@ public class PlayerService {
             PlayerModel updatedPlayer = playerRepository.save(existingPlayer);
             return playerMapper.toDTO(updatedPlayer);
         } else {
-            return null;
+            throw new PlayerNotFoundException(playerId);
         }
     }
 }

@@ -11,6 +11,8 @@ import com.project.modulo4.models.player.dto.PlayerDTO;
 import com.project.modulo4.models.player.dto.UpdatePlayerDTO;
 import com.project.modulo4.models.player.model.PlayerModel;
 import com.project.modulo4.repository.ClubRepository;
+import com.project.modulo4.utils.exception.ClubNotFoundException;
+import com.project.modulo4.utils.exception.LeagueNotFoundException;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -40,16 +42,16 @@ public class ClubService {
         return clubs.stream().map(clubMapper::toDTO).toList();
     }
 
-    public ClubDTO getById(Long clubId) {
+    public ClubDTO getById(Long clubId) throws ClubNotFoundException {
         Optional<ClubModel> clubOptional = clubRepository.findById(clubId);
         return clubOptional.map(clubMapper::toDTO).orElse(null);
     }
 
     @Transactional
-    public ClubDTO createClub(CreateClubDTO createClubDTO, Long leagueId) {
+    public ClubDTO createClub(CreateClubDTO createClubDTO, Long leagueId) throws LeagueNotFoundException {
         LeagueDTO leagueDTO = leagueService.getById(leagueId);
         if (leagueDTO == null) {
-            throw new RuntimeException("Liga no encontrada");
+            throw new LeagueNotFoundException(leagueId);
         }
 
         ClubModel clubModel = clubMapper.toModel(createClubDTO);
@@ -63,7 +65,7 @@ public class ClubService {
     }
 
 
-    public ClubDTO updateClub(Long clubId, UpdateClubDTO updateClubDTO) {
+    public ClubDTO updateClub(Long clubId, UpdateClubDTO updateClubDTO) throws ClubNotFoundException {
         Optional<ClubModel> clubOptional = clubRepository.findById(clubId);
         if (clubOptional.isPresent()) {
             ClubModel existingClub = clubOptional.get();
@@ -71,7 +73,7 @@ public class ClubService {
             ClubModel updatedClub = clubRepository.save(existingClub);
             return clubMapper.toDTO(updatedClub);
         } else {
-            return null;
+             throw new ClubNotFoundException(clubId);
         }
     }
 

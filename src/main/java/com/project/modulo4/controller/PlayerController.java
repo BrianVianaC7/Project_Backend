@@ -6,6 +6,9 @@ import com.project.modulo4.models.player.dto.CreatePlayerDTO;
 import com.project.modulo4.models.player.dto.PlayerDTO;
 import com.project.modulo4.models.player.dto.UpdatePlayerDTO;
 import com.project.modulo4.service.PlayerService;
+import com.project.modulo4.utils.exception.ClubNotFoundException;
+import com.project.modulo4.utils.exception.NationNotFoundException;
+import com.project.modulo4.utils.exception.PlayerNotFoundException;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,25 +36,25 @@ public class PlayerController {
 
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<PlayerDTO> getPlayerById(@PathVariable Long id) {
+    public ResponseEntity<PlayerDTO> getPlayerById(@PathVariable Long id) throws PlayerNotFoundException {
         PlayerDTO player = playerService.getById(id);
         if (player != null) {
             return ResponseEntity.ok(player);
         } else {
-            return ResponseEntity.notFound().build();
+            throw new PlayerNotFoundException(id);
         }
     }
 
     @PostMapping("/{nationId}/{clubId}/player")
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<PlayerDTO> createPlayer(@Valid @RequestBody CreatePlayerDTO createPlayerDTO,@PathVariable Long nationId, @PathVariable Long clubId) {
+    public ResponseEntity<PlayerDTO> createPlayer(@Valid @RequestBody CreatePlayerDTO createPlayerDTO, @PathVariable Long nationId, @PathVariable Long clubId) throws NationNotFoundException, ClubNotFoundException {
         PlayerDTO createdPlayer = playerService.createPlayer(createPlayerDTO, nationId, clubId);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdPlayer);
     }
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<Void> deletePlayerById(@PathVariable Long id) {
+    public ResponseEntity<Void> deletePlayerById(@PathVariable Long id) throws PlayerNotFoundException {
         try {
             playerService.deleteById(id);
             return ResponseEntity.ok().build();
@@ -62,7 +65,7 @@ public class PlayerController {
 
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<PlayerDTO> updatePlayerById(@PathVariable Long id, @Valid @RequestBody UpdatePlayerDTO updatePlayerDTO) {
+    public ResponseEntity<PlayerDTO> updatePlayerById(@PathVariable Long id, @Valid @RequestBody UpdatePlayerDTO updatePlayerDTO) throws PlayerNotFoundException {
         PlayerDTO updatedPlayer = playerService.updatePlayer(id, updatePlayerDTO);
         if (updatedPlayer != null) {
             return ResponseEntity.ok(updatedPlayer);

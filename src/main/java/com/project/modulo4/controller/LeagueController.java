@@ -4,6 +4,9 @@ package com.project.modulo4.controller;
 import com.project.modulo4.models.club.dto.ClubDTO;
 import com.project.modulo4.models.league.dto.LeagueDTO;
 import com.project.modulo4.service.LeagueService;
+import com.project.modulo4.utils.exception.ClubNotFoundException;
+import com.project.modulo4.utils.exception.LeagueNotFoundException;
+import com.project.modulo4.utils.exception.PlayerNotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -27,18 +30,18 @@ public class LeagueController {
 
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<LeagueDTO> getLeagueById(@PathVariable Long id) {
+    public ResponseEntity<LeagueDTO> getLeagueById(@PathVariable Long id) throws LeagueNotFoundException {
         LeagueDTO league = leagueService.getById(id);
         if (league != null) {
             return ResponseEntity.ok(league);
         } else {
-            return ResponseEntity.notFound().build();
+            throw new LeagueNotFoundException(id);
         }
     }
 
     @GetMapping("{leagueId}/clubs")
     @ResponseStatus(HttpStatus.OK)
-    public List<ClubDTO> findClubsByLeague(@PathVariable Long leagueId) {
+    public List<ClubDTO> findClubsByLeague(@PathVariable Long leagueId) throws LeagueNotFoundException {
         return leagueService.findClubsByLeague(leagueId);
     }
 

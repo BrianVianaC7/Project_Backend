@@ -6,6 +6,9 @@ import com.project.modulo4.models.club.dto.UpdateClubDTO;
 import com.project.modulo4.models.player.dto.PlayerDTO;
 import com.project.modulo4.models.player.dto.UpdatePlayerDTO;
 import com.project.modulo4.service.ClubService;
+import com.project.modulo4.utils.exception.ClubNotFoundException;
+import com.project.modulo4.utils.exception.LeagueNotFoundException;
+import com.project.modulo4.utils.exception.PlayerNotFoundException;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,29 +34,30 @@ public class ClubController {
 
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<ClubDTO> getClubById(@PathVariable Long id) {
+    public ResponseEntity<ClubDTO> getClubById(@PathVariable Long id) throws ClubNotFoundException {
         ClubDTO club = clubService.getById(id);
         if (club != null) {
             return ResponseEntity.ok(club);
         } else {
-            return ResponseEntity.notFound().build();
+            throw new ClubNotFoundException(id);
         }
     }
+
     @PostMapping("/{leagueId}/club")
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<ClubDTO> createClub(@Valid @RequestBody CreateClubDTO createClubDTO, @PathVariable Long leagueId) {
+    public ResponseEntity<ClubDTO> createClub(@Valid @RequestBody CreateClubDTO createClubDTO, @PathVariable Long leagueId) throws LeagueNotFoundException {
         ClubDTO createdClub = clubService.createClub(createClubDTO, leagueId);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdClub);
     }
 
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<ClubDTO> updateClubById(@PathVariable Long id, @Valid @RequestBody UpdateClubDTO updateClubDTO) {
+    public ResponseEntity<ClubDTO> updateClubById(@PathVariable Long id, @Valid @RequestBody UpdateClubDTO updateClubDTO) throws ClubNotFoundException{
         ClubDTO updatedClub = clubService.updateClub(id, updateClubDTO);
         if (updatedClub != null) {
             return ResponseEntity.ok(updatedClub);
         } else {
-            return ResponseEntity.notFound().build();
+            throw new ClubNotFoundException(id);
         }
     }
 }

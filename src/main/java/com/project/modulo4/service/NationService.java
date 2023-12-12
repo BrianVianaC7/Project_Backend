@@ -4,6 +4,7 @@ import com.project.modulo4.mapper.NationMapper;
 import com.project.modulo4.models.nation.dto.NationDTO;
 import com.project.modulo4.models.nation.model.NationModel;
 import com.project.modulo4.repository.NationRepository;
+import com.project.modulo4.utils.exception.NationNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,7 +26,7 @@ public class NationService {
         return nations.stream().map(nationMapper::toDTO).toList();
     }
 
-    public NationDTO getById(Long nationId) {
+    public NationDTO getById(Long nationId) throws NationNotFoundException {
         Optional<NationModel> nationOptional = nationRepository.findById(nationId);
         return nationOptional.map(x -> nationMapper.toDTO(x)).orElse(null);
     }
