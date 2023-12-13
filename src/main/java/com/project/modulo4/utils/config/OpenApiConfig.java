@@ -6,9 +6,10 @@ import io.swagger.v3.oas.annotations.info.Info;
 
 @OpenAPIDefinition(
         info = @Info(
-                title = "API de Futbol",
-                description = "API para administración de Futbol.",
-                version = "v0.5.0"
+                title = "FUTBOL_DB",
+                description = "FUTBOL_DB es una API REST implementada con Spring Boot y MySQL.\n" +
+                        "\nOfrece un conjunto completo de operaciones para gestionar datos de jugadores, nacionalidades, ligas y clubes.",
+                version = "v1.0.0"
         )
 )
 public class OpenApiConfig {
