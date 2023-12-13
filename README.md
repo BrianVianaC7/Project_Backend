@@ -60,6 +60,6 @@
 <h2>Integrantes del Proyecto</h2>
 <p>Este proyecto fue desarrollado por el equipo 7 de BEDU Full Stack Java :</p>
     <li>Brian Alejandro Viana Clavijo</li>
+    <li>Ivan Heredia de la Cruz</li>
+    
 
-
-<p>¡Disfruta explorando y trabajando con este backend de administración de jugadores!</p>
