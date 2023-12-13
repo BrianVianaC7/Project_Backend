@@ -61,5 +61,7 @@
 <p>Este proyecto fue desarrollado por el equipo 7 de BEDU Full Stack Java :</p>
     <li>Brian Alejandro Viana Clavijo</li>
     <li>Ivan Heredia de la Cruz</li>
+    <li>Wendy Diblit Osorno Herrera</li>
+    <li>Francisco Aldama</li>
     
 
