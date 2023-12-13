@@ -1,15 +1,9 @@
 package com.project.modulo4.models.nation.dto;
 
 import com.project.modulo4.models.league.dto.LeagueDTO;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
-@Getter
-@Setter
-@ToString
-@AllArgsConstructor
+@Data
 public class NationDTO {
     private long nationId;
     private String nationName;
