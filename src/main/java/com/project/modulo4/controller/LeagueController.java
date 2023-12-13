@@ -7,6 +7,8 @@ import com.project.modulo4.service.LeagueService;
 import com.project.modulo4.utils.exception.ClubNotFoundException;
 import com.project.modulo4.utils.exception.LeagueNotFoundException;
 import com.project.modulo4.utils.exception.PlayerNotFoundException;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,19 +17,22 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController
+@Tag(name = "Ligas")
 @Slf4j
+@RestController
 @RequestMapping("/leagues")
 public class LeagueController {
     @Autowired
     private LeagueService leagueService;
 
+    @Operation(summary = "Obtiene la lista de todas las Ligas")
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
     public List<LeagueDTO> getAll() {
         return leagueService.getAll();
     }
 
+    @Operation(summary = "Obtiene una Liga determinada")
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<LeagueDTO> getLeagueById(@PathVariable Long id) throws LeagueNotFoundException {
@@ -39,6 +44,7 @@ public class LeagueController {
         }
     }
 
+    @Operation(summary = "Obtiene todos los Clubes de una Liga determinada")
     @GetMapping("{leagueId}/clubs")
     @ResponseStatus(HttpStatus.OK)
     public List<ClubDTO> findClubsByLeague(@PathVariable Long leagueId) throws LeagueNotFoundException {

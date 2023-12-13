@@ -9,6 +9,8 @@ import com.project.modulo4.service.PlayerService;
 import com.project.modulo4.utils.exception.ClubNotFoundException;
 import com.project.modulo4.utils.exception.NationNotFoundException;
 import com.project.modulo4.utils.exception.PlayerNotFoundException;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,8 +21,9 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 
-@RestController
+@Tag(name = "Jugadores")
 @Slf4j
+@RestController
 @RequestMapping("/players")
 public class PlayerController {
 
@@ -28,12 +31,14 @@ public class PlayerController {
     private PlayerService playerService;
 
 
+    @Operation(summary = "Obtiene la lista de todos los Jugadores")
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
     public List<PlayerDTO> getAll() {
         return playerService.getAll();
     }
 
+    @Operation(summary = "Obtiene un Jugador determinado")
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<PlayerDTO> getPlayerById(@PathVariable Long id) throws PlayerNotFoundException {
@@ -45,6 +50,7 @@ public class PlayerController {
         }
     }
 
+    @Operation(summary = "Crea un Jugador con una Nacionalidad determinada en un Club determinado")
     @PostMapping("/{nationId}/{clubId}/player")
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<PlayerDTO> createPlayer(@Valid @RequestBody CreatePlayerDTO createPlayerDTO, @PathVariable Long nationId, @PathVariable Long clubId) throws NationNotFoundException, ClubNotFoundException {
@@ -52,6 +58,7 @@ public class PlayerController {
         return ResponseEntity.status(HttpStatus.CREATED).body(createdPlayer);
     }
 
+    @Operation(summary = "Elimina un Jugador determiando")
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<Void> deletePlayerById(@PathVariable Long id) throws PlayerNotFoundException {
@@ -63,6 +70,7 @@ public class PlayerController {
         }
     }
 
+    @Operation(summary = "Edita un Jugador determinado")
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<PlayerDTO> updatePlayerById(@PathVariable Long id, @Valid @RequestBody UpdatePlayerDTO updatePlayerDTO) throws PlayerNotFoundException {

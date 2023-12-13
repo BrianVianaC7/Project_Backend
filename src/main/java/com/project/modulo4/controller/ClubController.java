@@ -9,6 +9,8 @@ import com.project.modulo4.service.ClubService;
 import com.project.modulo4.utils.exception.ClubNotFoundException;
 import com.project.modulo4.utils.exception.LeagueNotFoundException;
 import com.project.modulo4.utils.exception.PlayerNotFoundException;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,21 +19,23 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
-@RestController
+@Tag(name = "Clubs")
 @Slf4j
+@RestController
 @RequestMapping("/clubs")
 public class ClubController {
 
     @Autowired
     private ClubService clubService;
 
+    @Operation(summary = "Obtiene la lista de todos los Clubes")
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
     public List<ClubDTO> getAll() {
         return clubService.getAll();
     }
 
+    @Operation(summary = "Obtiene un Club determinado")
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<ClubDTO> getClubById(@PathVariable Long id) throws ClubNotFoundException {
@@ -43,6 +47,7 @@ public class ClubController {
         }
     }
 
+    @Operation(summary = "Crea un Club en una Liga determinada")
     @PostMapping("/{leagueId}/club")
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<ClubDTO> createClub(@Valid @RequestBody CreateClubDTO createClubDTO, @PathVariable Long leagueId) throws LeagueNotFoundException {
@@ -51,6 +56,7 @@ public class ClubController {
     }
 
     @PutMapping("/{id}")
+    @Operation(summary = "Edita un Club determinado")
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<ClubDTO> updateClubById(@PathVariable Long id, @Valid @RequestBody UpdateClubDTO updateClubDTO) throws ClubNotFoundException{
         ClubDTO updatedClub = clubService.updateClub(id, updateClubDTO);
