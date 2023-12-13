@@ -10,9 +10,14 @@ import com.project.modulo4.models.player.dto.UpdatePlayerDTO;
 import com.project.modulo4.models.player.model.PlayerModel;
 import org.mapstruct.*;
 
+import java.util.List;
+
 @Mapper(componentModel = "spring", injectionStrategy = InjectionStrategy.CONSTRUCTOR, nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
 public interface PlayerMapper {
     PlayerDTO toDTO(PlayerModel playerModel);
+
+    List<PlayerDTO> toDTO(List<PlayerModel> model);
+
 
     //source objeto de entrada , target de salida
     @Mapping(target = "id", ignore = true)
