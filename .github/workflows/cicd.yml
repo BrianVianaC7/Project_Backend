@@ -4,7 +4,7 @@ on:
   push:
 
 jobs:
-  continuous-integration:
+  cicd:
     runs-on: ubuntu-latest
     steps:
       - name: Obtener los últimos cambios del repositorio
