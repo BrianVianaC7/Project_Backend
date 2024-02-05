@@ -22,12 +22,13 @@ jobs:
             gradle-version: 8.0.2
             gradle-executable: true
             build-root-directory: build
-            arguments: --info
+            arguments: --info --custom-dependency-graph=true
             generate-job-summary: true
-            dependency-graph: true
+            dependency-graph: disabled
             artifact-retention-days: 7
             workflow-job-context: ${{ toJson(github) }}
             github-token: ${{ secrets.GITHUB_TOKEN }}
+            node-version: 20
 
       - name: Compilar el proyecto
         run: gradle build
