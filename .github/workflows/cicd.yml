@@ -7,7 +7,7 @@ jobs:
   cicd:
     runs-on: ubuntu-latest
     steps:
-      - name: Obtener los últimos cambios del repositorio
+      - name: Obtener los Ãºltimos cambios del repositorio
         uses: actions/checkout@v4
 
       - name: Instalar Java 17
@@ -16,17 +16,23 @@ jobs:
             distribution: temurin
             java-version: 17
 
-      - name: Configuración de Gradle
+      - name: ConfiguraciÃ³n de Gradle
         uses: gradle/gradle-build-action@v2
         with:
-            distribution: temurin
-            java-version: 17
-            node-version: 20
+            gradle-version: 8.0.2
+            gradle-executable: true
+            build-root-directory: build
+            arguments: --info
+            generate-job-summary: true
+            dependency-graph: true
+            artifact-retention-days: 7
+            workflow-job-context: ${{ toJson(github) }}
+            github-token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Compilar el proyecto
         run: gradle build
 
-      - name: Análisis de código con SonarQube
+      - name: AnÃ¡lisis de cÃ³digo con SonarQube
         uses: SonarSource/sonarcloud-github-action@master
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -37,3 +43,17 @@ jobs:
 
       - name: Ejecutar pruebas E2E con Cucumber
         run: gradle cucumber
+        
+      - name: ConfiguraciÃ³n de Gradle
+        uses: gradle/gradle-build-action@v2
+        with:
+            gradle-version: 8.0.2
+            gradle-executable: true
+            build-root-directory: build
+            arguments: --info
+            generate-job-summary: true
+            dependency-graph: true
+            artifact-retention-days: 7
+            workflow-job-context: ${{ toJson(github) }}
+            github-token: ${{ secrets.GITHUB_TOKEN }}
+            node-version: 20
