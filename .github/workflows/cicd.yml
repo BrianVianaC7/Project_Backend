@@ -19,19 +19,28 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
-    - name: Set up JDK 17
+    - name: Set up JDK 21
       uses: actions/setup-java@v4
       with:
-        java-version: '17'
+        java-version: '21'
         distribution: 'temurin'
 
     # Configure Gradle for optimal use in GiHub Actions, including caching of downloaded dependencies.
     # See: https://github.com/gradle/actions/blob/main/setup-gradle/README.md
     - name: Setup Gradle
       uses: gradle/actions/setup-gradle@ec92e829475ac0c2315ea8f9eced72db85bb337a # v3.0.0
+      id: setup-gradle
+      with:
+        gradle-version: release-candidate
+    - run: gradle build --dry-run # just test build configuration
+    - run: echo "The release-candidate version was ${{ steps.setup-gradle.outputs.gradle-version }}"
 
     - name: Build with Gradle Wrapper
       run: ./gradlew build
+
+    - name: Sonar-Scanner action
+      uses: LowCostCustoms/sonar-scanner-action@v2
+            
 
     # NOTE: The Gradle Wrapper is the default and recommended way to run Gradle (https://docs.gradle.org/current/userguide/gradle_wrapper.html).
     # If your project does not have the Gradle Wrapper configured, you can use the following configuration to run Gradle with a specified version.
@@ -44,6 +53,9 @@ jobs:
     # - name: Build with Gradle 8.5
     #   run: gradle build
 
+                
+            
+
   dependency-submission:
 
     runs-on: ubuntu-latest
@@ -52,8 +64,8 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
-    - name: Set up JDK 17
+    - name: Set up JDK 21
       uses: actions/setup-java@v4
       with:
-        java-version: '17'
+        java-version: '21'
         distribution: 'temurin'
