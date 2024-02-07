@@ -38,11 +38,28 @@ jobs:
     - name: Make gradlew executable
       run: chmod +x ./gradlew
 
+    - name: Install MySQL
+      uses: samin/mysql-action@v1
+      with:
+        host: localhost
+        port: 3306
+        server: 'utf8'
+        collation: 'utf8_general_ci'
+        mysql-version: '8.0'
+        mysql-database: 'soccer_db'
+        mysql-root-password: 'Cuetzala1'
+        mysql-user: 'root'
+        mysql-password: 'Cuetzala1'
+
     - name: Build with Gradle Wrapper
       run: ./gradlew build
 
-    - name: Sonar-Scanner action
-      uses: LowCostCustoms/sonar-scanner-action@v2
+    - name: Official SonarQube Scan
+  # You may pin to the exact commit or the version.
+  # uses: SonarSource/sonarqube-scan-action@69c1a75940dec6249b86dace6b630d3a2ae9d2a7
+      uses: SonarSource/sonarqube-scan-action@v2.0.1
+   
+          
             
 
     # NOTE: The Gradle Wrapper is the default and recommended way to run Gradle (https://docs.gradle.org/current/userguide/gradle_wrapper.html).
