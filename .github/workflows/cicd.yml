@@ -56,11 +56,12 @@ jobs:
     - name: Build with Gradle Wrapper
       run: ./gradlew build
 
-    - name: SonarCloud Scan
-      uses: sonarsource/sonarcloud-github-action@master
+    - name: Sonarqube Scan with Gradle Build
+      timeout-minutes: 5
       env:
-        #GITHUB_TOKEN: ''
-        SONAR_TOKEN: '9cb8d0d7729dcfd70c2dbff331db5ffe050267e2'
+          SONAR_TOKEN: '9cb8d0d7729dcfd70c2dbff331db5ffe050267e2'
+      uses: trideepnag1911/gradle-build-with-sonarqube@v1.0
+    
    
           
             
