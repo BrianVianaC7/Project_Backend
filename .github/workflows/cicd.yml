@@ -11,6 +11,8 @@ on:
   push:
 
 jobs:
+
+
   build:
 
     runs-on: ubuntu-latest
@@ -54,10 +56,8 @@ jobs:
     - name: Build with Gradle Wrapper
       run: ./gradlew build
 
-    - name: Official SonarQube Scan
-  # You may pin to the exact commit or the version.
-  # uses: SonarSource/sonarqube-scan-action@69c1a75940dec6249b86dace6b630d3a2ae9d2a7
-      uses: SonarSource/sonarqube-scan-action@v2.0.1
+    - name: SonarCloud Scan
+      uses: sonarsource/sonarcloud-github-action@master
    
           
             
