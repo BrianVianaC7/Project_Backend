@@ -1,95 +1,54 @@
-# This workflow uses actions that are not certified by GitHub.
-# They are provided by a third-party and are governed by
-# separate terms of service, privacy policy, and support
-# documentation.
-# This workflow will build a Java project with Gradle and cache/restore any dependencies to improve the workflow execution time
-# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-java-with-gradle
-
-name: Java CI with Gradle
+name: Java CI/CD with SonarQube and MySQL
 
 on:
   push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
 
 jobs:
-
-
   build:
-
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
+
+    services:
+      mysql:
+        image: mysql:latest
+        env:
+          MYSQL_ROOT_PASSWORD: Cuetzala1
+          MYSQL_DATABASE: soccer_db
+          MYSQL_USER: root
+          MYSQL_PASSWORD: Cuetzala1
+        ports:
+          - 3306:3306
+        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
 
     steps:
-    - uses: actions/checkout@v4
-    - name: Set up JDK 21
-      uses: actions/setup-java@v4
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set up JDK 11
+      uses: actions/setup-java@v2
       with:
-        java-version: '21'
-        distribution: 'temurin'
+        java-version: '11'
 
-    # Configure Gradle for optimal use in GiHub Actions, including caching of downloaded dependencies.
-    # See: https://github.com/gradle/actions/blob/main/setup-gradle/README.md
-    - name: Setup Gradle
-      uses: gradle/actions/setup-gradle@v3
-      id: setup-gradle
+    - name: Cache Gradle dependencies
+      uses: actions/cache@v2
       with:
-        gradle-version: release-candidate
-    - run: gradle build --dry-run # just test build configuration
-    - run: echo "The release-candidate version was ${{ steps.setup-gradle.outputs.gradle-version }}"
-    
-    - name: Make gradlew executable
-      run: chmod +x ./gradlew
+        path: ~/.gradle/caches
+        key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
+        restore-keys: |
+          ${{ runner.os }}-gradle-
 
-    - name: Install MySQL
-      uses: samin/mysql-action@v1
+    - name: Build with Gradle
+      run: ./gradlew build --info
+
+    - name: SonarQube Scan
+      uses: SonarSource/sonarqube-scan-action@v1
       with:
-        host: localhost
-        port: 3306
-        server: 'utf8'
-        collation: 'utf8_general_ci'
-        mysql-version: '8.0'
-        mysql-database: 'soccer_db'
-        mysql-root-password: 'Cuetzala1'
-        mysql-user: 'root'
-        mysql-password: 'Cuetzala1'
-
-    - name: Build with Gradle Wrapper
-      run: ./gradlew build
-
-    - name: Sonarqube Scan with Gradle Build
-      timeout-minutes: 5
-      env:
-          SONAR_TOKEN: '9cb8d0d7729dcfd70c2dbff331db5ffe050267e2'
-      uses: trideepnag1911/gradle-build-with-sonarqube@v1.0
-    
-   
-          
-            
-
-    # NOTE: The Gradle Wrapper is the default and recommended way to run Gradle (https://docs.gradle.org/current/userguide/gradle_wrapper.html).
-    # If your project does not have the Gradle Wrapper configured, you can use the following configuration to run Gradle with a specified version.
-    #
-    # - name: Setup Gradle
-    #   uses: gradle/actions/setup-gradle@ec92e829475ac0c2315ea8f9eced72db85bb337a # v3.0.0
-    #   with:
-    #     gradle-version: '8.5'
-    #
-    # - name: Build with Gradle 8.5
-    #   run: gradle build
-
-                
-            
-
-  dependency-submission:
-
-    runs-on: ubuntu-latest
-    permissions:
-      contents: write
-
-    steps:
-    - uses: actions/checkout@v4
-    - name: Set up JDK 21
-      uses: actions/setup-java@v4
-      with:
-        java-version: '21'
-        distribution: 'temurin'
+        projectKey: 'your_project_key' # Replace with your SonarQube project key
+        projectName: 'Your Project Name' # Replace with your project name
+        organization: 'your_organization' # Replace with your SonarQube organization key
+        token: ${{ secrets.SONAR_TOKEN }} # Ensure you have set up a secret named SONAR_TOKEN with your SonarQube token
+        scannerVersion: '4.6.0'
