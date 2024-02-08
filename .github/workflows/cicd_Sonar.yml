@@ -2,11 +2,9 @@ name: Java CI/CD with SonarQube and MySQL
 
 on:
   push:
-    branches:
-      - main
+    
   pull_request:
-    branches:
-      - main
+  
 
 jobs:
   build:
@@ -18,11 +16,11 @@ jobs:
         env:
           MYSQL_ROOT_PASSWORD: Cuetzala1
           MYSQL_DATABASE: soccer_db
-          MYSQL_USER: root
-          MYSQL_PASSWORD: Cuetzala1
+          
         ports:
           - 3306:3306
         options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
+    
 
     steps:
     - name: Checkout repository
@@ -32,23 +30,20 @@ jobs:
       uses: actions/setup-java@v2
       with:
         java-version: '21'
-
-    - name: Cache Gradle dependencies
-      uses: actions/cache@v2
+        distribution: 'temurin'
+    - name: Setup Gradle
+      uses: gradle/actions/setup-gradle@v3
+      id: setup-gradle
       with:
-        path: ~/.gradle/caches
-        key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
-        restore-keys: |
-          ${{ runner.os }}-gradle-
+        gradle-version: release-candidate
+    - run: gradle build --dry-run # just test build configuration
+    - run: echo "The release-candidate version was ${{ steps.setup-gradle.outputs.gradle-version }}"
+    
+    - name: Make gradlew executable
+      run: chmod +x ./gradlew
+      
+    - name: Build with Gradle Wrapper
+      run: ./gradlew build
 
-    - name: Build with Gradle
-      run: ./gradlew build --info
 
-    - name: SonarQube Scan
-      uses: SonarSource/sonarqube-scan-action@v1
-      with:
-        projectKey: 'BrianVianaC7_Project_Backend' # Replace with your SonarQube project key
-        projectName: 'Project_Backend' # Replace with your project name
-        organization: 'projectbackendteam7' # Replace with your SonarQube organization key
-        token: 'e28ef18ff7e43f594d70fad43eb1108fbc37d0e5' # Ensure you have set up a secret named SONAR_TOKEN with your SonarQube token
-        scannerVersion: '4.6.0'
+    
