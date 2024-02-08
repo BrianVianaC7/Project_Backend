@@ -44,17 +44,6 @@ jobs:
       
     - name: Build with Gradle Wrapper
       run: ./gradlew build
-      
-    - uses: actions/checkout@v3
-      with:
-        # Disabling shallow clones is recommended for improving the relevancy of reporting
-        fetch-depth: 0
-    - name: SonarQube Scan
-      uses: sonarsource/sonarqube-scan-action@master
-      env:
-        SONAR_TOKEN: 'e28ef18ff7e43f594d70fad43eb1108fbc37d0e5'
-        SONAR_HOST_URL: 'http://localhost:9000'
 
-    
 
     
