@@ -47,8 +47,8 @@ jobs:
     - name: SonarQube Scan
       uses: SonarSource/sonarqube-scan-action@v1
       with:
-        projectKey: 'your_project_key' # Replace with your SonarQube project key
-        projectName: 'Your Project Name' # Replace with your project name
-        organization: 'your_organization' # Replace with your SonarQube organization key
-        token: ${{ secrets.SONAR_TOKEN }} # Ensure you have set up a secret named SONAR_TOKEN with your SonarQube token
+        projectKey: 'BrianVianaC7_Project_Backend' # Replace with your SonarQube project key
+        projectName: 'Project_Backend' # Replace with your project name
+        organization: 'projectbackendteam7' # Replace with your SonarQube organization key
+        token: 'e28ef18ff7e43f594d70fad43eb1108fbc37d0e5' # Ensure you have set up a secret named SONAR_TOKEN with your SonarQube token
         scannerVersion: '4.6.0'
