@@ -57,6 +57,20 @@
     <li>Accede a la documentación de la API generada automáticamente en <a href="http://localhost:8080/swagger-ui.html">http://localhost:8080/swagger-ui.html</a>.</li>
 </ol>
 
+<h2>Tests</h2>
+<ol>
+    <h2>Controllers</h2>
+    <li>Club</li>
+    <li>League</li>
+    <li>Nation</li>
+    <li>Player</li>
+    <h2>Services</h2>
+    <li>Club</li>
+    <li>League</li>
+    <li>Nation</li>
+    <li>Player</li> 
+</ol>
+
 <h2>Integrantes del Proyecto</h2>
 <p>Este proyecto fue desarrollado por el equipo 7 de BEDU Full Stack Java :</p>
     <li>Brian Alejandro Viana Clavijo</li>
