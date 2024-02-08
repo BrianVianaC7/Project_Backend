@@ -62,6 +62,8 @@
     <li>Brian Alejandro Viana Clavijo</li>
     <li>Ivan Heredia de la Cruz</li>
     <li>Wendy Diblit Osorno Herrera</li>
+    <li>Mirsha Nohely Cortés Sánchez</li>
+    <li>Omar Fernando Gonzáles Sandoval</li>
     <li>Francisco Aldama</li>
     
 
