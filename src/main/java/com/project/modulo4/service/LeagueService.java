@@ -7,7 +7,6 @@ import com.project.modulo4.models.league.dto.LeagueDTO;
 import com.project.modulo4.models.league.model.LeagueModel;
 import com.project.modulo4.repository.LeagueRepository;
 import com.project.modulo4.utils.exception.LeagueNotFoundException;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,13 +14,18 @@ import java.util.Optional;
 
 @Service
 public class LeagueService {
-    @Autowired
+    final
     LeagueRepository leagueRepository;
-    @Autowired
+    final
     LeagueMapper leagueMapper;
 
-    @Autowired
-    private ClubMapper clubMapper;
+    private final ClubMapper clubMapper;
+
+    public LeagueService(LeagueRepository leagueRepository, LeagueMapper leagueMapper, ClubMapper clubMapper) {
+        this.leagueRepository = leagueRepository;
+        this.leagueMapper = leagueMapper;
+        this.clubMapper = clubMapper;
+    }
 
     public List<LeagueDTO> getAll() {
         List<LeagueModel> leagues = leagueRepository.findAll();

@@ -1,7 +1,5 @@
 package com.project.modulo4.controller;
 
-import com.project.modulo4.models.club.dto.ClubDTO;
-import com.project.modulo4.models.club.dto.CreateClubDTO;
 import com.project.modulo4.models.player.dto.CreatePlayerDTO;
 import com.project.modulo4.models.player.dto.PlayerDTO;
 import com.project.modulo4.models.player.dto.UpdatePlayerDTO;
@@ -13,7 +11,6 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -27,8 +24,11 @@ import java.util.List;
 @RequestMapping("/players")
 public class PlayerController {
 
-    @Autowired
-    private PlayerService playerService;
+    private final PlayerService playerService;
+
+    public PlayerController(PlayerService playerService) {
+        this.playerService = playerService;
+    }
 
 
     @Operation(summary = "Obtiene la lista de todos los Jugadores")
