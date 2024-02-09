@@ -4,9 +4,6 @@ import com.project.modulo4.mapper.ClubMapper;
 import com.project.modulo4.mapper.NationMapper;
 import com.project.modulo4.mapper.PlayerMapper;
 import com.project.modulo4.models.club.dto.ClubDTO;
-import com.project.modulo4.models.club.dto.CreateClubDTO;
-import com.project.modulo4.models.club.model.ClubModel;
-import com.project.modulo4.models.league.dto.LeagueDTO;
 import com.project.modulo4.models.nation.dto.NationDTO;
 import com.project.modulo4.models.player.dto.CreatePlayerDTO;
 import com.project.modulo4.models.player.dto.PlayerDTO;
@@ -17,9 +14,7 @@ import com.project.modulo4.utils.exception.ClubNotFoundException;
 import com.project.modulo4.utils.exception.NationNotFoundException;
 import com.project.modulo4.utils.exception.PlayerNotFoundException;
 import jakarta.transaction.Transactional;
-import lombok.extern.java.Log;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -29,22 +24,26 @@ import java.util.Optional;
 @Service
 public class PlayerService {
 
-    @Autowired
+    final
     PlayerRepository playerRepository;
-    @Autowired
-    private PlayerMapper playerMapper;
+    private final PlayerMapper playerMapper;
 
-    @Autowired
-    private ClubService clubService;
+    private final ClubService clubService;
 
-    @Autowired
-    private NationService nationService;
+    private final NationService nationService;
 
-    @Autowired
-    private ClubMapper clubMapper;
+    private final ClubMapper clubMapper;
 
-    @Autowired
-    private NationMapper nationMapper;
+    private final NationMapper nationMapper;
+
+    public PlayerService(PlayerRepository playerRepository, PlayerMapper playerMapper, ClubService clubService, NationService nationService, ClubMapper clubMapper, NationMapper nationMapper) {
+        this.playerRepository = playerRepository;
+        this.playerMapper = playerMapper;
+        this.clubService = clubService;
+        this.nationService = nationService;
+        this.clubMapper = clubMapper;
+        this.nationMapper = nationMapper;
+    }
 
     public List<PlayerDTO> getAll() {
         List<PlayerModel> players = playerRepository.findAll();
@@ -84,7 +83,7 @@ public class PlayerService {
 
         return playerMapper.toDTO(playerModel);
     }
-    public void deleteById(Long playerId) throws PlayerNotFoundException {
+    public void deleteById(Long playerId) {
         playerRepository.deleteById(playerId);
     }
 

@@ -6,7 +6,6 @@ import com.project.modulo4.utils.exception.NationNotFoundException;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,8 +17,11 @@ import java.util.List;
 @RequestMapping("/nations")
 public class NationController {
 
-    @Autowired
-    private NationService nationService;
+    private final NationService nationService;
+
+    public NationController(NationService nationService) {
+        this.nationService = nationService;
+    }
 
     @Operation(summary = "Obtiene la lista de todas las Nacionalidades")
     @GetMapping
