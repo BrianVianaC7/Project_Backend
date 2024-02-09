@@ -25,8 +25,13 @@ import java.util.List;
 @RequestMapping("/clubs")
 public class ClubController {
 
-    @Autowired
-    private ClubService clubService;
+
+
+    private final ClubService clubService;
+
+    public ClubController(ClubService clubService) {
+        this.clubService = clubService;
+    }
 
     @Operation(summary = "Obtiene la lista de todos los Clubes")
     @GetMapping
