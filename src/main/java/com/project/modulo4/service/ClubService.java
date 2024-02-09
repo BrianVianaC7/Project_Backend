@@ -7,11 +7,14 @@ import com.project.modulo4.models.club.dto.CreateClubDTO;
 import com.project.modulo4.models.club.dto.UpdateClubDTO;
 import com.project.modulo4.models.club.model.ClubModel;
 import com.project.modulo4.models.league.dto.LeagueDTO;
+import com.project.modulo4.models.player.dto.PlayerDTO;
+import com.project.modulo4.models.player.dto.UpdatePlayerDTO;
+import com.project.modulo4.models.player.model.PlayerModel;
 import com.project.modulo4.repository.ClubRepository;
 import com.project.modulo4.utils.exception.ClubNotFoundException;
 import com.project.modulo4.utils.exception.LeagueNotFoundException;
 import jakarta.transaction.Transactional;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -20,21 +23,19 @@ import java.util.Optional;
 @Service
 public class ClubService {
 
-    final
+    @Autowired
     ClubRepository clubRepository;
-    final
+    @Autowired
     ClubMapper clubMapper;
 
-    private final LeagueMapper leagueMapper;
+    @Autowired
+    private LeagueMapper leagueMapper;
 
-    private final LeagueService leagueService;
+    @Autowired
+    private NationService nationService;
 
-    public ClubService(ClubRepository clubRepository, ClubMapper clubMapper, LeagueMapper leagueMapper, NationService nationService, LeagueService leagueService) {
-        this.clubRepository = clubRepository;
-        this.clubMapper = clubMapper;
-        this.leagueMapper = leagueMapper;
-        this.leagueService = leagueService;
-    }
+    @Autowired
+    private LeagueService leagueService;
 
     public List<ClubDTO> getAll() {
         List<ClubModel> clubs = clubRepository.findAll();
@@ -56,7 +57,7 @@ public class ClubService {
         ClubModel clubModel = clubMapper.toModel(createClubDTO);
         clubModel.setLeague(leagueMapper.toModel(leagueDTO));
         // Obtienes el próximo ID disponible manualmente
-        long nextId = clubRepository.findMaxClubId() + 1;
+        Long nextId = clubRepository.findMaxClubId() + 1;
         clubModel.setClubId(nextId);
         clubModel = clubRepository.save(clubModel);
 
