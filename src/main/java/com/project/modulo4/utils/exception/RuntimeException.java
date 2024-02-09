@@ -3,16 +3,18 @@ package com.project.modulo4.utils.exception;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.io.Serializable;
+
 @Getter
 @Setter
 public class RuntimeException extends Exception {
 
-    private String code;
-    private Object details;
+    private final String code;
+    private final Serializable details;
 
     public RuntimeException(String message, String code, Object details) {
         super(message);
         this.code = code;
-        this.details = details;
+        this.details = (Serializable) details;
     }
 }

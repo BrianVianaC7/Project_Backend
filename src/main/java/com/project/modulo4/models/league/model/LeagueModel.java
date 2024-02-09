@@ -33,7 +33,7 @@ public class LeagueModel {
     @Column(nullable = false, length = 50)
     private String leagueImage;
 
-    /*@OneToMany(mappedBy = "league")  // Establece el mapeo inverso
-    private List<ClubModel> clubs;*/
+    //@OneToMany(mappedBy = "league")   Establece el mapeo inverso
+    //private List<ClubModel> clubs;
 
 }
