@@ -11,6 +11,8 @@
     <li><strong>Mapeo de Objetos:</strong> MapStruct se utiliza para mapear entre DTOs y entidades de jugador.</li>
     <li><strong>Pruebas Unitarias:</strong> Se implementan pruebas unitarias con Mockito y JUnit 5 para garantizar la robustez del código.</li>
     <li><strong>Contenedor de Imágenes:</strong> Se utiliza Paketo Buildpacks para construir imágenes de contenedor.</li>
+    <li><strong>Control de Versiones:</strong> Se utilizó GitHub y GitFlow para el control de versiones y el flujo de trabajo.</li>
+    <li><strong>CI/CD:</strong> Se implementó CI/CD con GitHub Actions y SonarCloud para garantizar la calidad del código.</li>
 </ul>
 
 <h2>Librerías Utilizadas</h2>
