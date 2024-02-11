@@ -25,6 +25,7 @@ class LeagueRepositoryTest {
     @Test
     void testFindClubsByLeague() {
         long leagueId = 1L;
+
         List<ClubModel> clubModels = new ArrayList<>();
         ClubModel clubModel = new ClubModel();
 
