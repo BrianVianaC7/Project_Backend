@@ -58,14 +58,5 @@
     <li>Ejecuta la aplicación usando tu IDE o mediante el comando <code>./gradlew bootRun</code>.</li>
     <li>Accede a la documentación de la API generada automáticamente en <a href="http://localhost:8080/swagger-ui.html">http://localhost:8080/swagger-ui.html</a>.</li>
 </ol>
-
-<h2>Integrantes del Proyecto</h2>
-<p>Este proyecto fue desarrollado por el equipo 7 de BEDU Full Stack Java :</p>
-    <li>Brian Alejandro Viana Clavijo</li>
-    <li>Ivan Heredia de la Cruz</li>
-    <li>Wendy Diblit Osorno Herrera</li>
-    <li>Mirsha Nohely Cortés Sánchez</li>
-    <li>Omar Fernando Gonzáles Sandoval</li>
-    <li>Francisco Aldama</li>
     
 
